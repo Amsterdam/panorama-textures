@@ -1,0 +1,48 @@
+{
+  "_links": {
+    "self": {
+      "href": "https://api.data.amsterdam.nl/panorama/panoramas/TMX7316010203-000724_pano_0000_000057/?format=json"
+    },
+    "equirectangular_full": {
+      "href": "https://data.amsterdam.nl/panorama/2018/05/16/TMX7316010203-000724/pano_0000_000057/equirectangular/panorama_8000.jpg"
+    },
+    "equirectangular_medium": {
+      "href": "https://data.amsterdam.nl/panorama/2018/05/16/TMX7316010203-000724/pano_0000_000057/equirectangular/panorama_4000.jpg"
+    },
+    "equirectangular_small": {
+      "href": "https://data.amsterdam.nl/panorama/2018/05/16/TMX7316010203-000724/pano_0000_000057/equirectangular/panorama_2000.jpg"
+    },
+    "cubic_img_preview": {
+      "href": "https://data.amsterdam.nl/panorama/2018/05/16/TMX7316010203-000724/pano_0000_000057/cubic/preview.jpg"
+    },
+    "thumbnail": {
+      "href": "https://api.data.amsterdam.nl/panorama/thumbnail/TMX7316010203-000724_pano_0000_000057/?format=json"
+    },
+    "adjacencies": {
+      "href": "https://api.data.amsterdam.nl/panorama/panoramas/TMX7316010203-000724_pano_0000_000057/adjacencies/?format=json"
+    }
+  },
+  "cubic_img_baseurl": "https://data.amsterdam.nl/panorama/2018/05/16/TMX7316010203-000724/pano_0000_000057/cubic/",
+  "cubic_img_pattern": "https://data.amsterdam.nl/panorama/2018/05/16/TMX7316010203-000724/pano_0000_000057/cubic/{z}/{f}/{y}/{x}.jpg",
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      4.92300891083328,
+      52.3789348795016,
+      51.0322643397376
+    ]
+  },
+  "pano_id": "TMX7316010203-000724_pano_0000_000057",
+  "timestamp": "2018-05-16T07:43:22.082840Z",
+  "filename": "pano_0000_000057.jpg",
+  "surface_type": "L",
+  "mission_distance": 5,
+  "mission_type": "bi",
+  "mission_year": "2018",
+  "tags": [
+    "mission-bi",
+    "mission-2018",
+    "surface-land",
+    "mission-distance-5"
+  ]
+}
