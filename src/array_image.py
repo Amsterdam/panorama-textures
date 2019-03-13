@@ -2,17 +2,6 @@ from numpy import squeeze, dsplit, asarray, dstack
 from scipy.ndimage import map_coordinates
 
 
-def get_rgb_channels_from_array_image(array_img):
-    """
-    Orders the dimensions of the scipy image array around, so that it becomes an array of three color channels
-
-    :param array_img: image array
-    :return: reordered image array
-    """
-    # split image in the 3 RGB channels
-    return squeeze(dsplit(array_img, 3))
-
-
 def get_as_rgb_array(image_file):
     """
     Gets the raw image prepared for calculations.
@@ -20,9 +9,10 @@ def get_as_rgb_array(image_file):
     :param image_file: loaded image file
     :return: scipy image array, an array of three color channels
     """
-    # read image as scipy rgb image array
+    # read image as numpy rgb image array
     panorama_array_image = asarray(image_file, dtype="int32")
-    return get_rgb_channels_from_array_image(panorama_array_image)
+    # split image in the 3 RGB channels
+    return squeeze(dsplit(panorama_array_image, 3))
 
 
 def sample_rgb_array_image_as_array(coordinates, rgb_array):
@@ -39,7 +29,7 @@ def sample_rgb_array_image_as_array(coordinates, rgb_array):
 
     # resample each channel of the source image
     #   (this needs to be done 'per channel' because otherwise the map_coordinates method
-    #    works on the wrong dimension: in rgb_array_images from scipy.misc.fromimage the
+    #    works on the wrong dimension: in rgb_array_images from numpy.assarray(image) the
     #    first dimension is the channel (r, g and b), and 2nd and 3rd dimensions are y and x,
     #    but map_coordinates expects the the coordinates to map to to be 1st and 2nd, therefore
     #    we extract each channel, so that y and x become 1st and 2nd array), after resampling
