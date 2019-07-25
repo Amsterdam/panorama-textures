@@ -2,7 +2,7 @@ from PIL import Image
 from numpy import linspace, float64, meshgrid
 
 from array_image import get_as_rgb_array, sample_rgb_array_image_as_array
-from array_math import get_rd_vector, cartesian2cylindrical
+from array_math import get_vector, cartesian2cylindrical
 
 SOURCE_WIDTH = 8000  # pixels
 PANO_ASPECT = 2  # width over height
@@ -36,7 +36,7 @@ def extract_texture(obj, pov, input_filename, output_filename, output_resolution
     gevel_x, _ = meshgrid(x, z)
     gevel_y, gevel_z = meshgrid(y, z)
 
-    vector_x, vector_y, vector_z = get_rd_vector((gevel_x, gevel_y, gevel_z), pov)
+    vector_x, vector_y, vector_z = get_vector((gevel_x, gevel_y, gevel_z), pov)
 
     image_x, image_y = cartesian2cylindrical((vector_y, vector_x, vector_z), source_width=SOURCE_WIDTH,
                                              source_height=PANO_HEIGHT, r_is_1=False)
