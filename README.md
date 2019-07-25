@@ -66,3 +66,10 @@ To 'build' it:
 
 Then in the obj_output folder you will find the following sets of files:
 
+
+#### Textures on BAG objects
+
+There is also the possibility to create textures for BAG objects (both Pand and Bouwblok), these however require
+the Python bindings for GDAL to be installed, which is not a trivial task, and changes hugely from environment to 
+environment. For running this code the Docker is advised, which comes with a working install of these bindings.
+
