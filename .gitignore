@@ -107,3 +107,6 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+# Docker output dir
+/texture_output

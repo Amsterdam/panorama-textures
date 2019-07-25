@@ -1,6 +1,5 @@
 certifi==2019.6.16
 chardet==3.0.4
-GDAL==2.4.1
 geojson-rewind==0.1.1
 idna==2.8
 numpy==1.16.4

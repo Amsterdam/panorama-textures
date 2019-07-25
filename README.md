@@ -1,7 +1,11 @@
 # panorama-textures
 
 Extracting textures for (3d) objects from panoramas. This project contains example code to extract possible textures 
-from panorama images
+from panorama images.
+
+### Run in Docker
+
+This code can be run in a docker, see DOCKER-README.md
 
 ### See code
 
@@ -22,10 +26,12 @@ The output of the actions below are currently also available in GitHub, see the 
 
 Requires `python` to run, but examples are included, so they can be shown as is.
 
-To run examples, install the dependencies from `requirements.txt`:
+To run examples, install the dependencies from `requirements.txt`, best practice is to create a virtual environment 
+to do so:
 
+    python3 -m venv .venv
+    source .venv/bin/activate
     pip install -r src/requirements.txt
-
 
 #### Sample
 

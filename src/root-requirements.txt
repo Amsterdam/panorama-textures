@@ -1,4 +1,3 @@
-gdal
 geojson-rewind
 numpy
 Pillow
