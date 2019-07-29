@@ -13,6 +13,23 @@ Before the first run, make sure you have Docker installed, then build the image 
 
 ### Extract texture for a Plane in 3D space
 
+    usage: texture_line.py [-h] [--resolution RESOLUTION] [--height HEIGHT]
+                        pano_id left right filename
+ 
+    positional arguments:
+       pano_id               Id of the panorama to project on a plane
+       left                  comma-separated x,y in RD: left bottom point of the
+                             plane to project on
+       right                 comma-separated x,y in RD: right bottom point of the
+                             plane to project on
+       filename              output filename
+     
+     optional arguments:
+       -h, --help            show this help message and exit
+       --resolution RESOLUTION
+                             Resolution in pixels per meter (defaults to 10)
+       --height HEIGHT       Height of the facade in meters (defaults to 30)
+
 Running from the root of the project, otherwise replace the `pwd` with the full path to your the output directory.
 
 It is possible to extract the required input parameters from the Data Portal of the City of Amsterdam:
@@ -26,20 +43,6 @@ The RD-coordinates can be copied from the page (remove the space)
 Then select the panorama image in the [interface](https://data.amsterdam.nl/data/panorama/TMX7316010203-001187_pano_0000_001503/?center=52.3728418%2C4.893152&heading=48.97997622076379&lagen=pano%3A1&locatie=52.3728418022451%2C4.89315196317801&pitch=0.3190651159979569&zoom=14)
 The pano_id can be copied from the URL.
 
-    positional arguments:
-      pano_id               Id of the panorama to project on a plane
-      left                  comma-separated x,y in RD: left bottom point of the
-                            plane to project on
-      right                 comma-separated x,y in RD: right bottom point of the
-                            plane to project on
-      filename              output filename
-    
-    optional arguments:
-      -h, --help            show this help message and exit
-      --resolution RESOLUTION
-                            Resolution in pixels per meter (defaults to 10)
-      --height HEIGHT       Height of the facade in meters (defaults to 30)
-
 The final command may look something like this:
 
     docker run -v `pwd`/texture_output:/app/textmap_output local/panorama-texture python texture_line.py \
@@ -52,6 +55,26 @@ The final command may look something like this:
                      
 ### Extract texture for a Building
 
+
+    usage: texture_pand.py [-h] [--resolution RESOLUTION] [--height HEIGHT]
+                           [--simplify SIMPLIFY] [--force]
+                           pano_id pand_id filename
+    
+    positional arguments:
+      pano_id               Id of the panorama to project on a plane
+      pand_id               The BAG ID of the building on which the panorama is to
+                            be projected
+      filename              output filename
+    
+    optional arguments:
+      -h, --help            show this help message and exit
+      --resolution RESOLUTION
+                            Resolution in pixels per meter (defaults to 10)
+      --height HEIGHT       Height of the facade in meters (defaults to 30)
+      --simplify SIMPLIFY   Smoothing the geometry, in meters (default off)
+      --force               Force all forward facing sides to be projected, even
+                            those under a shallow angle
+
 Running from the root of the project, otherwise replace the `pwd` with the full path to your the output directory.
 
 It is possible to extract the required input parameters from the Data Portal of the City of Amsterdam:
@@ -60,6 +83,8 @@ It is possible to extract the required input parameters from the Data Portal of 
 
 Then select the panorama image in the [interface](https://data.amsterdam.nl/data/panorama/TMX7316010203-001187_pano_0000_001503/?center=52.3728418%2C4.893152&heading=48.97997622076379&lagen=pano%3A1&locatie=52.3728418022451%2C4.89315196317801&pitch=0.3190651159979569&zoom=14)
 The pano_id can be copied from the URL.
+
+In this case the command would look something like this:
 
     docker run -v `pwd`/texture_output:/app/textmap_output local/panorama-texture python texture_pand.py \
                      TMX7316010203-001187_pano_0000_001503 \
@@ -86,6 +111,24 @@ are facing the camera, even the ones with a shallow angle.
  
 ### Extract texture for a Building Block
 
+    usage: texture_bouwblok.py [-h] [--resolution RESOLUTION] [--height HEIGHT]
+                               [--simplify SIMPLIFY] [--force]
+                               pano_id blok_id filename
+    
+    positional arguments:
+      pano_id               Id of the panorama to project on a plane
+      blok_id               The BAG ID of the block on which the panorama is to be
+                            projected
+      filename              output filename
+    
+    optional arguments:
+      -h, --help            show this help message and exit
+      --resolution RESOLUTION
+                            Resolution in pixels per meter (defaults to 10)
+      --height HEIGHT       Height of the facade in meters (defaults to 30)
+      --simplify SIMPLIFY   Smoothing the geometry, in meters (default off)
+      --force               Force all forward facing sides to be projected, even
+
 Running from the root of the project, otherwise replace the `pwd` with the full path to your the output directory.
 
 It is possible to extract the required input parameters from the Data Portal of the City of Amsterdam:
@@ -96,6 +139,9 @@ Press the 'i' icon to expand the BAG-ID
 
 Then select the panorama image in the [interface](https://data.amsterdam.nl/data/panorama/TMX7316010203-001187_pano_0000_001503/?center=52.3728418%2C4.893152&heading=48.97997622076379&lagen=pano%3A1&locatie=52.3728418022451%2C4.89315196317801&pitch=0.3190651159979569&zoom=14)
 The pano_id can be copied from the URL.
+                            those under a shallow angle
+
+An example of the usage could be:
 
     docker run -v `pwd`/texture_output:/app/textmap_output local/panorama-texture python texture_bouwblok.py \
                      TMX7316010203-001187_pano_0000_001503 \
