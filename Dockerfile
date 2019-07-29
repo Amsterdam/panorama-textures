@@ -28,4 +28,7 @@ USER datapunt
 COPY src/array_image.py /app/
 COPY src/array_math.py /app/
 COPY src/texture.py /app/
-COPY src/bag2texture.py /app/
+COPY src/texture_bouwblok.py /app/
+COPY src/texture_line.py /app/
+COPY src/texture_pand.py /app/
+COPY src/panorama_texture.py /app/

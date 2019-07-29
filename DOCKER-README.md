@@ -11,9 +11,115 @@ Before the first run, make sure you have Docker installed, then build the image 
 
     docker build . -t local/panorama-texture
 
-### Extract texture for a BAG-Pand
+### Extract texture for a Plane in 3D space
 
-Running from the root of the project, otherwise modify the `pwd` accordingly to change the output directory.
+Running from the root of the project, otherwise replace the `pwd` with the full path to your the output directory.
 
-    docker run -v `pwd`/texture_output:/app/textmap_output local/panorama-texture python bag2texture.py
+It is possible to extract the required input parameters from the Data Portal of the City of Amsterdam:
 
+[Left-bottom point](https://data.amsterdam.nl/data/geozoek/?center=52.3730434%2C4.8936129&locatie=52.3733044%2C4.8936084&zoom=15)
+and
+[Right-bottom point](https://data.amsterdam.nl/data/geozoek/?center=52.3728795%2C4.8941328&locatie=52.3729217%2C4.8944116&zoom=15)
+
+The RD-coordinates can be copied from the page (remove the space)
+
+Then select the panorama image in the [interface](https://data.amsterdam.nl/data/panorama/TMX7316010203-001187_pano_0000_001503/?center=52.3728418%2C4.893152&heading=48.97997622076379&lagen=pano%3A1&locatie=52.3728418022451%2C4.89315196317801&pitch=0.3190651159979569&zoom=14)
+The pano_id can be copied from the URL.
+
+    positional arguments:
+      pano_id               Id of the panorama to project on a plane
+      left                  comma-separated x,y in RD: left bottom point of the
+                            plane to project on
+      right                 comma-separated x,y in RD: right bottom point of the
+                            plane to project on
+      filename              output filename
+    
+    optional arguments:
+      -h, --help            show this help message and exit
+      --resolution RESOLUTION
+                            Resolution in pixels per meter (defaults to 10)
+      --height HEIGHT       Height of the facade in meters (defaults to 30)
+
+The final command may look something like this:
+
+    docker run -v `pwd`/texture_output:/app/textmap_output local/panorama-texture python texture_line.py \
+                     TMX7316010203-001187_pano_0000_001503 \
+                     121386.57,487384.36 \
+                     121440.98,487341.41 \
+                     dam_1-7.jpg \
+                     --height 36 \
+                     --resolution 15
+                     
+### Extract texture for a Building
+
+Running from the root of the project, otherwise replace the `pwd` with the full path to your the output directory.
+
+It is possible to extract the required input parameters from the Data Portal of the City of Amsterdam:
+
+[pand_id](https://data.amsterdam.nl/data/bag/pand/id0363100012168052/?center=52.3728795%2C4.8941328&zoom=13)
+
+Then select the panorama image in the [interface](https://data.amsterdam.nl/data/panorama/TMX7316010203-001187_pano_0000_001503/?center=52.3728418%2C4.893152&heading=48.97997622076379&lagen=pano%3A1&locatie=52.3728418022451%2C4.89315196317801&pitch=0.3190651159979569&zoom=14)
+The pano_id can be copied from the URL.
+
+    docker run -v `pwd`/texture_output:/app/textmap_output local/panorama-texture python texture_pand.py \
+                     TMX7316010203-001187_pano_0000_001503 \
+                     0363100012168052 \
+                     dam_1.jpg \
+                     --height 33 \
+                     --resolution 12
+
+Only sides from the building that are facing under not a too shallow angle to the panorama are pasted in the image.
+ 
+With additional parameters:
+ 
+    docker run -v `pwd`/texture_output:/app/textmap_output local/panorama-texture python texture_pand.py \
+                     TMX7316010203-001187_pano_0000_001503 \
+                     0363100012168052 \
+                     dam_1_simple.jpg \
+                     --height 33 \
+                     --resolution 12 \
+                     --simplify 1 \
+                     --force
+
+This simplifies the geometry (removing all aspects smaller than 1m) and forces to paste all the sides that
+are facing the camera, even the ones with a shallow angle.
+ 
+### Extract texture for a Building Block
+
+Running from the root of the project, otherwise replace the `pwd` with the full path to your the output directory.
+
+It is possible to extract the required input parameters from the Data Portal of the City of Amsterdam:
+
+[blok_id](https://data.amsterdam.nl/data/gebieden/bouwblok/id03630012100938/?center=52.3728795%2C4.8941328&zoom=13)
+
+Press the 'i' icon to expand the BAG-ID
+
+Then select the panorama image in the [interface](https://data.amsterdam.nl/data/panorama/TMX7316010203-001187_pano_0000_001503/?center=52.3728418%2C4.893152&heading=48.97997622076379&lagen=pano%3A1&locatie=52.3728418022451%2C4.89315196317801&pitch=0.3190651159979569&zoom=14)
+The pano_id can be copied from the URL.
+
+    docker run -v `pwd`/texture_output:/app/textmap_output local/panorama-texture python texture_bouwblok.py \
+                     TMX7316010203-001187_pano_0000_001503 \
+                     03630012100938 \
+                     ya77.jpg \
+                     --height 37 \
+                     --resolution 16
+
+Only sides from the building that are facing the panorama are pasted in the image.
+ 
+With additional parameters:
+ 
+    docker run -v `pwd`/texture_output:/app/textmap_output local/panorama-texture python texture_bouwblok.py \
+                     TMX7316010203-001187_pano_0000_001503 \
+                     03630012100938 \
+                     ya77_simple.jpg \
+                     --height 37 \
+                     --resolution 16 \
+                     --simplify 2 \
+                     --force
+
+This simplifies the geometry (removing all aspects smaller than 2m) and forces to paste all the sides that
+are facing the camera, even the ones with a shallow angle.
+ 
+ 
+ 
+ 
