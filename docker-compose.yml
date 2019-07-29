@@ -1,0 +1,15 @@
+version: "3.7"
+services:
+  web:
+    build:
+      context: .
+      dockerfile: WebDockerfile
+    ports:
+      - "8087:8000"
+    environment:
+      SECRET_KEY: hoi
+      UWSGI_HTTP: ":8000"
+      UWSGI_MODULE: "wsgi:app"
+      UWSGI_MASTER: 1
+      UWSGI_DIE_ON_TERM: 1
+      UWSGI_WSGI_DISABLE_FILE_WRAPPER: "true"

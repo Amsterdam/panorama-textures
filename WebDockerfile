@@ -2,6 +2,7 @@ FROM amsterdam/python
 MAINTAINER datapunt@amsterdam.nl
 
 ENV PYTHONUNBUFFERED 1
+EXPOSE 8000
 
 RUN apt-get install -y \
         libgdal-dev \
@@ -16,6 +17,7 @@ RUN adduser --system datapunt \
 	&& chown datapunt /app/data
 
 WORKDIR /app
+RUN pip install uwsgi
 COPY src/requirements.txt /app/
 RUN pip install pygdal=="`gdal-config --version`.*"
 RUN pip install -r requirements.txt
@@ -29,3 +31,8 @@ COPY src/texture_bouwblok.py /app/
 COPY src/texture_line.py /app/
 COPY src/texture_pand.py /app/
 COPY src/panorama_texture.py /app/
+
+COPY src/wsgi.py /app/
+COPY src/uwsgi.ini /app/
+
+CMD uwsgi
