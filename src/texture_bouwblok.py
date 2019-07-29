@@ -22,7 +22,8 @@ def main():
     simplify = None if not args.simplify else args.simplify
     force = True if args.force else False
 
-    export_blok_to_texture(args.pano_id, args.blok_id, args.filename, resolution, height, simplify, force)
+    image_file = export_blok_to_texture(args.pano_id, args.blok_id, resolution, height, simplify, force)
+    image_file.save(f'textmap_output/{args.filename}', 'jpeg')
 
 
 if __name__ == '__main__':

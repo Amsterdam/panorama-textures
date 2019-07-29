@@ -22,7 +22,8 @@ def main():
     resolution = 10 if not args.resolution else args.resolution
     height = 30 if not args.height else args.height
 
-    export_line_to_texture(args.pano_id, line, args.filename, resolution, height)
+    image_file = export_line_to_texture(args.pano_id, line, resolution, height)
+    image_file.save(f'textmap_output/{args.filename}', 'jpeg')
 
 
 if __name__ == '__main__':

@@ -31,7 +31,7 @@ def vector_length(vector_2d):
     return sqrt(vector_2d[X]**2 + vector_2d[Y]**2)
 
 
-def export_to_texture(pano_id, height, resolution, filename, simplify, force, pand_id=None, blok_id=None):
+def export_to_texture(pano_id, height, resolution, simplify, force, pand_id=None, blok_id=None):
     source_file, pov = _get_pano_image(pano_id)
     polygon = _extract_bag_polygon(blok_id, pand_id, simplify)
     img_height = int(round(height * resolution))
@@ -58,7 +58,7 @@ def export_to_texture(pano_id, height, resolution, filename, simplify, force, pa
         result.paste(im=image_file, box=(width_index, 0))
         width_index = width_index + facade['width']
 
-    result.save(f'textmap_output/{filename}', 'jpeg')
+    return result
 
 
 def _project_facade(facade, pov, source_file, img_height, resolution, force=False):
@@ -156,26 +156,29 @@ def _get_pano_image(pano_id):
     return source_file, pov
 
 
-def export_line_to_texture(pano_id, line, filename, resolution, height):
+def export_line_to_texture(pano_id, line, resolution, height):
     source_file, pano_pov = _get_pano_image(pano_id)
     img_height = int(round(height * resolution))
     plane = _create_line(height, img_height, resolution, pano_pov, line)
     facade = _project_facade(plane, pano_pov, source_file, img_height, resolution, force=True)
-    image_file = Image.fromarray(facade['image_array'].astype('uint8'), 'RGB')
-    image_file.save(f'textmap_output/{filename}', 'jpeg')
+
+    return Image.fromarray(facade['image_array'].astype('uint8'), 'RGB')
 
 
-def export_pand_to_texture(pano_id, pand_id, filename, resolution, height, simplify, force):
-    export_to_texture(pano_id, height, resolution, filename, simplify, force, pand_id=pand_id)
+def export_pand_to_texture(pano_id, pand_id, resolution, height, simplify, force):
+    return export_to_texture(pano_id, height, resolution, simplify, force, pand_id=pand_id)
 
 
-def export_blok_to_texture(pano_id, blok_id, filename, resolution, height, simplify, force):
-    export_to_texture(pano_id, height, resolution, filename, simplify, force, blok_id=blok_id)
+def export_blok_to_texture(pano_id, blok_id, resolution, height, simplify, force):
+    return export_to_texture(pano_id, height, resolution, simplify, force, blok_id=blok_id)
 
 
 if __name__ == "__main__":
     hoogte = 32
     resolution = 10
 
-    export_to_texture("TMX7316010203-001187_pano_0000_001503", hoogte, resolution, "dam_1.jpg", None, True, pand_id="0363100012168052")
-    export_to_texture("TMX7316010203-001187_pano_0000_001503", hoogte, resolution, "ya77.jpg", None, True, blok_id="03630012100938")
+    img = export_to_texture("TMX7316010203-001187_pano_0000_001503", hoogte, resolution, None, True, pand_id="0363100012168052")
+    img.save("textmap_output/dam_1.jpg", 'jpeg')
+
+    img = export_to_texture("TMX7316010203-001187_pano_0000_001503", hoogte, resolution, None, True, blok_id="03630012100938")
+    img.save("textmap_output/ya77.jpg", 'jpeg')
