@@ -5,7 +5,7 @@ services:
       context: .
       dockerfile: WebDockerfile
     ports:
-      - "8160:8000"
+      - "8161:8000"
     environment:
       UWSGI_HTTP: ":8000"
       UWSGI_MODULE: "wsgi:app"
