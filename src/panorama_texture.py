@@ -4,10 +4,10 @@ from io import BytesIO
 import requests
 
 from PIL import Image
-# from math import cos, sin, pi, sqrt, acos, atan2
-from numpy.core.umath import sqrt, square, arccos, arctan2, mod, pi, absolute
+from math import sqrt, atan2
+from numpy.core.umath import sqrt, arctan2, pi, absolute
 from functools import reduce
-from numpy import linspace, float64, meshgrid, full, int32, append, argmin, array, moveaxis
+from numpy import linspace, float64, meshgrid, full, int32, argmin, array, moveaxis
 from array_math import get_vector, cartesian2cylindrical
 from array_image import get_as_rgb_array, sample_rgb_array_image_as_array, sample_rgb_array_image_as_array_multi
 from osgeo import ogr, osr

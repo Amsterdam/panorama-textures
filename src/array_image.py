@@ -1,6 +1,5 @@
 from numpy import squeeze, dsplit, asarray, dstack, array
 from scipy.ndimage import map_coordinates
-import numpy as np
 
 
 def get_as_rgb_array(image_file):
@@ -16,7 +15,7 @@ def get_as_rgb_array(image_file):
     return squeeze(dsplit(panorama_array_image, 3))
 
 
-def sample_rgb_array_image_as_array(coordinates, rgb_array, index):
+def sample_rgb_array_image_as_array(coordinates, rgb_array):
     """
     Resampling of the source image
 
