@@ -28,4 +28,5 @@ COPY src/texture.py /app/
 COPY src/texture_bouwblok.py /app/
 COPY src/texture_line.py /app/
 COPY src/texture_pand.py /app/
+COPY src/texture_composite.py /app/
 COPY src/panorama_texture.py /app/
