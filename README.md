@@ -37,7 +37,7 @@ to do so:
 
 Two examples have been made from the Dam:
 
-See: [this sample on Amsterdam CityData](https://data.amsterdam.nl/data/panorama/TMX7316010203-000716_pano_0000_001622?modus=gesplitst&center=52.3728927%2C4.8930551&heading=-109.09024292815127&lagen=pano%3A1&legenda=false&locatie=52.3728926697179%2C4.89305514150316&pitch=-9.229251781352469&zoom=16) (valid as of february 2019)
+See: [this sample on Amsterdam Data en Informatie](https://data.amsterdam.nl/data/panorama/TMX7316010203-000716_pano_0000_001622?modus=gesplitst&center=52.3728927%2C4.8930551&heading=-109.09024292815127&lagen=pano%3A1&legenda=false&locatie=52.3728926697179%2C4.89305514150316&pitch=-9.229251781352469&zoom=16) (valid as of february 2019)
 
 To 'build' it:
 
